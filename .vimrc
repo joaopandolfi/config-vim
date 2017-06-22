@@ -45,7 +45,6 @@
      Plugin 'jlanzarotta/bufexplorer'
      Plugin 'tomtom/tcomment_vim'
      Plugin 'christoomey/vim-tmux-navigator'
-     Plugin 'nathanaelkane/vim-indent-guides'
      Plugin 'itchyny/lightline.vim'
      Plugin 'acoustichero/goldenrod.vim'
      Plugin 'airblade/vim-gitgutter'
@@ -111,11 +110,6 @@
   " Preserva o histórico do desfazer após o fim da sessão atual salvando-o em um arquivo
     set undodir=~/.vim/undobackups
     set undofile
- 
-  " Configuração dos recuos
-    let g:indent_guides_guide_size = 1
-    let g:indent_guides_color_change_percent = 3
-    let g:indent_guides_enable_on_vim_startup = 1
 
  " RSpec.vim mappings  
    map <Leader>t :call RunCurrentSpecFile()<CR>
