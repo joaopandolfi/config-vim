@@ -65,7 +65,7 @@ endfunction
   set showmatch
   set mat=10
   set ve=all
-
+  set mouse=a
 
  """""""""""""""""""" 3) Cores e fontes """"""""""""""""""""
   set number
@@ -76,9 +76,9 @@ endfunction
   set wrap
   set expandtab
   set smarttab
-  set shiftwidth=2
-  set tabstop=2
-  set softtabstop=2
+  set shiftwidth=4
+  set tabstop=4
+  set softtabstop=0
   set autoindent                                  
   set laststatus=2
   set statusline=\ %{HasPaste()}\ Arquivo:\ %F%m%r%h\ %w\ \ Diretório\ de\ trabalho:\ %r%{getcwd()}%h\ -\ Linha:\ %l\ -\ Coluna:\ %c
