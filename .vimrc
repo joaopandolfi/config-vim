@@ -1,5 +1,5 @@
  
-"""""""""""""""""""" ~/.vimrc por janjo """"""""""""""""""" "
+"""""""""""""""""""" ~/.vimrc por janjo && joaopandolfi """"""""""""""""""" "
 "
 "" Retorna verdadeiro se o modo de copiar e colar estiver ativado
 function! HasPaste()
