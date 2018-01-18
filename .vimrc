@@ -109,3 +109,21 @@ set term=screen-256color
 if filereadable(expand("~/.vim/plugin/abbreviations.vim"))
     source ~/.vim/plugin/abbreviations.vim
 endif  
+
+
+"====== complementação de palavras ====
+"usa o tab em modo insert para completar palavras
+function! InsertTabWrapper(direction)
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    elseif "backward" == a:direction
+        return "\<c-p>"
+    else
+        return "\<c-n>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper ("forward")<cr>
+inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
+
+syntax on
