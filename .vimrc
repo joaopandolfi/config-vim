@@ -88,7 +88,8 @@ endfunction
    map  <C-l> :tabn<CR>
    map  <C-h> :tabp<CR>
    map  <C-n> :tabnew<CR>
-      
+   map  <C-o> :tabnext<CR>
+   map  <C-i> :tabprev<CR>
        
   " RSpec.vim mapeamento  
    map <Leader>t :call RunCurrentSpecFile()<CR>
