@@ -1,4 +1,3 @@
- 
 """""""""""""""""""" ~/.vimrc por janjo && joaopandolfi """"""""""""""""""" "
 "
 "" Retorna verdadeiro se o modo de copiar e colar estiver ativado
@@ -38,6 +37,8 @@ endfunction
   Plugin 'acoustichero/goldenrod.vim'
   Plugin 'airblade/vim-gitgutter'
   Plugin 'jistr/vim-nerdtree-tabs'
+  Plugin 'bcicen/vim-vice'
+  Plugin 'fatih/vim-go'
                             
 
  " All of your Plugins must be added before the following line
@@ -87,10 +88,11 @@ endfunction
   " Mapeamento das tabs
    map  <C-l> :tabn<CR>
    map  <C-h> :tabp<CR>
-   map  <C-n> :tabnew<CR>
+   map  <C-m> :tabnew<CR>
    map  <C-o> :tabnext<CR>
    map  <C-i> :tabprev<CR>
-       
+   nmap <C-d> :q<CR>
+     
   " RSpec.vim mapeamento  
    map <Leader>t :call RunCurrentSpecFile()<CR>
    map <Leader>s :call RunNearestSpec()<CR>
@@ -99,16 +101,24 @@ endfunction
 
 
  " configurações do nerdtree
-  autocmd vimenter * NERDTree
+ " autocmd vimenter * NERDTree
   map <C-n> :NERDTreeToggle<CR>
 
-  
-set term=screen-256color
+" controlc
+vmap <C-x> :!pbcopy<CR>  
+vmap <C-c> :w !pbcopy<CR><CR> 
 
+  
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 if filereadable(expand("~/.vim/plugin/abbreviations.vim"))
     source ~/.vim/plugin/abbreviations.vim
 endif  
+
+" Theme
+set term=screen-256color
+colorscheme vice
 
 
 "====== complementação de palavras ====
