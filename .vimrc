@@ -72,7 +72,6 @@ endfunction
   set number
   syntax enable
   set background=dark
-  colorscheme goldenrod
   set nolinebreak
   set wrap
   set expandtab
