@@ -34,7 +34,6 @@ endfunction
   Plugin 'tomtom/tcomment_vim'
   Plugin 'christoomey/vim-tmux-navigator' 
   Plugin 'itchyny/lightline.vim'
-  Plugin 'acoustichero/goldenrod.vim'
   Plugin 'airblade/vim-gitgutter'
   Plugin 'jistr/vim-nerdtree-tabs'
   Plugin 'bcicen/vim-vice'
