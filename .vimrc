@@ -1,137 +1,155 @@
 """""""""""""""""""" ~/.vimrc por janjo && joaopandolfi """"""""""""""""""" "
-"
-"" Retorna verdadeiro se o modo de copiar e colar estiver ativado
+
+" ========================
+" 1) BASE
+" ========================
+set nocompatible
+syntax on
+filetype plugin indent on
+
+set history=1000
+set autoread
+
+" ========================
+" 2) INTERFACE
+" ========================
+set wildmenu
+set ruler
+set cmdheight=2
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+set hlsearch
+set showmatch
+set mat=10
+set mouse=a
+set number
+set background=dark
+set wrap
+set laststatus=2
+
+" ========================
+" 3) INDENTAÇÃO
+" ========================
+set expandtab
+set shiftwidth=4
+set tabstop=4
+set autoindent
+set smartindent
+
+" ========================
+" 4) STATUSLINE
+" ========================
 function! HasPaste()
-        if &paste
-            return 'PASTE MODE ON '
-        en
-            return 'PASTE MODE OFF '
-        return ''
+  if &paste
+    return 'PASTE MODE '
+  endif
+  return ''
 endfunction
 
+set statusline=%{HasPaste()}%f\ %y\ %m\ %=L:%l\ C:%c
 
-"""""""""""""""""""" 1) Configurações gerais """"""""""""""""""""
-"
-"" Usa as definições do vim, não as do vi
- set nocompatible
- set rtp+=~/.vim/bundle/Vundle.vim
- call vundle#begin()
+" ========================
+" 5) VUNDLE
+" ========================
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
- Plugin 'VundleVim/Vundle.vim'
- Plugin 'tpope/vim-fugitive'
- Plugin 'git://git.wincent.com/command-t.git'
- Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
- Plugin 'ascenator/L9', {'name': 'newL9'}
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-rake'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-bundler'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'itchyny/lightline.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'bcicen/vim-vice'
+Plugin 'fatih/vim-go'
 
-" Meus plugins
-  Plugin 'tpope/vim-rails'
-  Plugin 'tpope/vim-rake'
-  Plugin 'thoughtbot/vim-rspec'
-  Plugin 'vim-ruby/vim-ruby'
-  Plugin 'tpope/vim-bundler'
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'jlanzarotta/bufexplorer'
-  Plugin 'tomtom/tcomment_vim'
-  Plugin 'christoomey/vim-tmux-navigator' 
-  Plugin 'itchyny/lightline.vim'
-  Plugin 'airblade/vim-gitgutter'
-  Plugin 'jistr/vim-nerdtree-tabs'
-  Plugin 'bcicen/vim-vice'
-  Plugin 'fatih/vim-go'
-                            
+call vundle#end()
 
- " All of your Plugins must be added before the following line
-   call vundle#end()            " required
-    
-  set nocompatible      " We're running Vim, not Vi!
-  syntax on             " Enable syntax highlighting
-  filetype on           " Enable filetype detection
-  filetype indent on    " Enable filetype-specific indenting
-  filetype plugin on    " Enable filetype-specific plugins
- 
-  set history=1000
-   " Recarrega o arquivo caso ele seja editado por um programa
-   "externo enquanto aberto
-  set autoread
+" ========================
+" 6) NERDTREE
+" ========================
+map <C-n> :NERDTreeToggle<CR>
 
-  """""""""""""""""""" 2) Interface do vim """""""""""""""""""""
-  set wildmenu
-  set ruler
-  set cmdheight=2
-  set backspace=eol,start,indent
-  set whichwrap+=<,>,h,l
-  set hlsearch
-  set magic
-  set showmatch
-  set mat=10
-  set ve=all
-  set mouse=a
+autocmd VimEnter * if argc() == 0 | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")) | q | endif
 
- """""""""""""""""""" 3) Cores e fontes """"""""""""""""""""
-  set number
-  syntax enable
-  set background=dark
-  set nolinebreak
-  set wrap
-  set expandtab
-  set smarttab
-  set shiftwidth=4
-  set tabstop=4
-  set softtabstop=0
-  set autoindent                                  
-  set laststatus=2
-  set statusline=\ %{HasPaste()}\ Arquivo:\ %F%m%r%h\ %w\ \ Diretório\ de\ trabalho:\ %r%{getcwd()}%h\ -\ Linha:\ %l\ -\ Coluna:\ %c
-  set undodir=~/.vim/undobackups
-                 
-  " Mapeamento das tabs
-   map  <C-l> :tabn<CR>
-   map  <C-h> :tabp<CR>
-   map  <C-m> :tabnew<CR>
-   map  <C-o> :tabnext<CR>
-   map  <C-i> :tabprev<CR>
-   nmap <C-d> :q<CR>
-     
-  " RSpec.vim mapeamento  
-   map <Leader>t :call RunCurrentSpecFile()<CR>
-   map <Leader>s :call RunNearestSpec()<CR>
-   map <Leader>l :call RunLastSpec()<CR>
-   map <Leader>a :call RunAllSpecs()<CR>
+" ========================
+" 7) TABS
+" ========================
+map  <C-l> :tabn<CR>
+map  <C-h> :tabp<CR>
+map  <C-m> :tabnew<CR>
+map  <C-o> :tabnext<CR>
+map  <C-i> :tabprev<CR>
+nmap <C-d> :q<CR>
 
+" ========================
+" 8) RSpec
+" ========================
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
- " configurações do nerdtree
- " autocmd vimenter * NERDTree
-  map <C-n> :NERDTreeToggle<CR>
-
-" controlc
-vmap <C-x> :!pbcopy<CR>  
-vmap <C-c> :w !pbcopy<CR><CR> 
-
-  
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-if filereadable(expand("~/.vim/plugin/abbreviations.vim"))
-    source ~/.vim/plugin/abbreviations.vim
-endif  
-
-" Theme
+" ========================
+" 9) THEME
+" ========================
 set term=screen-256color
 colorscheme vice
 
+" ========================
+" 10) PASTE AUTOMÁTICO (SEM F12)
+" ========================
 
-"====== complementação de palavras ====
-"usa o tab em modo insert para completar palavras
+" remove qualquer toggle antigo
+set pastetoggle=
+silent! unmap <F12>
+silent! iunmap <F12>
+silent! vunmap <F12>
+
+" melhora resposta do terminal
+set ttimeout
+set ttimeoutlen=10
+
+" suporte robusto a bracketed paste
+if &term =~# 'xterm' || &term =~# 'screen' || &term =~# 'tmux'
+
+  " habilita bracketed paste ao entrar em insert
+  let &t_SI .= "\e[?2004h"
+  let &t_EI .= "\e[?2004l"
+
+  " begin paste
+  inoremap <silent> <special> <Esc>[200~ <C-o>:set paste<CR>
+
+  " end paste
+  inoremap <silent> <special> <Esc>[201~ <C-o>:set nopaste<CR>
+
+  " segurança extra
+  autocmd InsertLeave * set nopaste
+  autocmd BufLeave * set nopaste
+endif
+
+" ========================
+" 11) AUTOCOMPLETE TAB (RESPEITA PASTE)
+" ========================
 function! InsertTabWrapper(direction)
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    elseif "backward" == a:direction
-        return "\<c-p>"
-    else
-        return "\<c-n>"
-    endif
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<Tab>"
+  elseif a:direction == "backward"
+    return "\<C-p>"
+  else
+    return "\<C-n>"
+  endif
 endfunction
-inoremap <tab> <c-r>=InsertTabWrapper ("forward")<cr>
-inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
 
-syntax on
+inoremap <expr> <Tab> (&paste ? "\<Tab>" : InsertTabWrapper("forward"))
+inoremap <expr> <S-Tab> (&paste ? "\<S-Tab>" : InsertTabWrapper("backward"))
